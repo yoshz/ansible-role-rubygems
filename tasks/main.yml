@@ -1,0 +1,24 @@
+---
+
+- name: Install Ruby system packages
+  apt: pkg={{ item }}
+  with_items: [ruby, ruby-dev, build-essential]
+  tags: [packaging]
+
+- name: Install Ruby Gems by latest version
+  gem: name={{ item.key }} user_install=no state=latest
+  when: item.value == 'latest'
+  with_dict: rubygems
+  tags: [packaging]
+
+- name: Install Ruby Gems by specific version
+  gem: name={{ item.key }} version={{ item.value }} user_install=no state=present
+  when: item.value != 'latest' and item.value != 'absent'
+  with_dict: rubygems
+  tags: [packaging]
+
+- name: Uninstall Ruby Gems
+  gem: name={{ item.key }} user_install=no state=absent
+  when: item.value == 'absent'
+  with_dict: rubygems
+  tags: [packaging]

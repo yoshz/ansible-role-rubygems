@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: "Yosh de Vos"
+  description: An Ansible role installing ruby gems.
+  license: MIT
+  version: 0.1
+  min_ansible_version: 1.4
+  platforms:
+    - name: Ubuntu
+      versions:
+       - all
+    - name: Debian
+      versions:
+       - all
+  categories:
+    - packaging
+dependencies: []
